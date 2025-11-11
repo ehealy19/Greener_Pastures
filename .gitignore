@@ -1,0 +1,6 @@
+data/osrm/
+*.osrm
+*.osrm.*
+*.osm.pbf
+
+.DS_Store
