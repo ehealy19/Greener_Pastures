@@ -8,3 +8,8 @@ One of the biggest contributors to climate change is the excessive emissions cau
 - CodeCarbon
 - TheVroomProject
 - MIT's CarbonCounter
+
+
+## Usage
+Download and unzip the OSRM data from Google Drive into ~/data/osrm/
+https://drive.google.com/drive/folders/11vzuFH6DA_qzHtR2SbTANqURDeuaOqn0?usp=sharing
