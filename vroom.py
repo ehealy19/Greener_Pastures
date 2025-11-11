@@ -28,7 +28,7 @@ result = run(["vroom", "-i", input_path, "-o", output_path], check=True)
 
 # stop the code carbon tracker
 emissions = tracker.stop()
-print("Estimated O₂ emissions: {emissions:.6f} kg")
+print(f"Estimated O₂ emissions: {emissions:.6f} kg")
 
 # view the output results
 with open(output_path, "r", encoding="utf-8") as f:
