@@ -4,7 +4,7 @@
 # =======================================================
 
 set -e  # stop on first error
-echo "🌿 Starting setup for Greener Pastures..."
+echo "Starting setup for Greener Pastures..."
 
 # ------------------------------
 # 1. Conda Environment Setup
