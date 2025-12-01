@@ -49,14 +49,14 @@ for i, row in addys.iterrows():
 
 # Writing to JSON file
 DEPOT = [-75.38130569631731, 39.91697580591546]
-NUM_VEHICLES = 10
+NUM_VEHICLES = 13
 vroom = {
     "vehicles": [
         {
             "id": vid,
             "start": DEPOT,
             "end": DEPOT,
-            "capacity": [10]
+            "capacity": [8]
         }
         for vid in range(1, NUM_VEHICLES + 1)
     ],
@@ -69,5 +69,5 @@ for idx, row in addys.iterrows():
         "service": 300,
         "delivery": [1]
     })
-with open("./data/input/vroom_input.json", "w") as f:
+with open("./data/input/vroom_input1.json", "w") as f:
     json.dump(vroom, f, indent=2)

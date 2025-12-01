@@ -13,8 +13,8 @@ if result.returncode != 0:
     print("Please brew install vroom on the command line")
 
 # read in the JSON file of addresses
-input_path = "data/input/vroom_input.json"
-output_path = "data/output/vroom_output.json"
+input_path = "data/input/vroom_input1.json"
+output_path = "data/output/vroom_output1.json"
 try:
     with open(input_path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -33,4 +33,4 @@ print(f"Estimated O₂ emissions: {emissions:.6f} kg")
 # view the output results
 with open(output_path, "r", encoding="utf-8") as f:
     optimized_routes = json.load(f)
-print(json.dumps(optimized_routes, indent=2))
+# print(json.dumps(optimized_routes, indent=2))
