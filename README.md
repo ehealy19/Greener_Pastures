@@ -14,7 +14,7 @@ One of the biggest contributors to climate change is the excessive emissions cau
 1. git clone <this-repo>
 
 2. Download and unzip the OSRM data from Google Drive into ~/data/osrm/
-  https://drive.google.com/drive/folders/11vzuFH6DA_qzHtR2SbTANqURDeuaOqn0?usp=sharing
+  https://drive.google.com/drive/folders/1nMnt-cxcbrkVfoQmea7lhhsgWUuwgExL?usp=drive_link
 
 3. chmod +x ./run.sh
 4. ./run.sh
