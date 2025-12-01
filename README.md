@@ -13,8 +13,15 @@ One of the biggest contributors to climate change is the excessive emissions cau
 ## Usage
 1. git clone <this-repo>
 
-2. Download and unzip the OSRM data from Google Drive into ~/data/osrm/
+2. Download and unzip the OSRM data from Google Drive into Green_Pastures/data/osrm/
   https://drive.google.com/drive/folders/1nMnt-cxcbrkVfoQmea7lhhsgWUuwgExL?usp=drive_link
 
-3. chmod +x ./run.sh
-4. ./run.sh
+3. Add you data file to data/input in the form of .xlsx with columns Address and City (ie. Address = 370 Lancaster Ave City = Haverford)
+
+4. Either name you data file only_addresses_final.xlsx OR
+     a. Open the convert_to_geo.py file and change addys = pd.read_excel('./data/input/only_addresses_final.xlsx') to ('./data/input/**your_file_name_here**.xlsx')
+     b. Open the conver_to_add.py and change addys = pd.read_excel('./data/input/only_addresses_final.xlsx') to ('./data/input/**your_file_name_here**.xlsx') 
+
+5. chmod +x ./run.sh
+
+6. ./run.sh
