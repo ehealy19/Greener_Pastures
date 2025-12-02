@@ -3,7 +3,7 @@ import pandas as pd
 import json
 
 # Read in the addresses file
-addys = pd.read_excel('./data/input/only_addresses_final.xlsx')
+addys = pd.read_excel('../data/input/only_addresses_final.xlsx')
 addys['Long'] = None
 addys['Lat'] = None
 
@@ -69,5 +69,5 @@ for idx, row in addys.iterrows():
         "service": 300,
         "delivery": [1]
     })
-with open("./data/input/vroom_input1.json", "w") as f:
+with open("../data/input/vroom_input1.json", "w") as f:
     json.dump(vroom, f, indent=2)

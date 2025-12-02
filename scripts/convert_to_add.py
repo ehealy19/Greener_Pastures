@@ -2,10 +2,10 @@ import json
 import pandas as pd
 
 # Load original addresses for ID → address mapping
-addys = pd.read_excel("./data/input/only_addresses_final.xlsx")
+addys = pd.read_excel("../data/input/only_addresses_final.xlsx")
 
 # Load VROOM input (contains correct lat/long)
-with open("./data/input/vroom_input1.json") as f:
+with open("../data/input/vroom_input1.json") as f:
     vin = json.load(f)
 
 # Build lookup table (id → info)
@@ -24,7 +24,7 @@ for job in vin["jobs"]:
     }
 
 # Load VROOM output
-with open("./data/output/vroom_output1.json") as f:
+with open("../data/output/vroom_output1.json") as f:
     vout = json.load(f)
 
 rows = []
@@ -57,6 +57,6 @@ df = pd.DataFrame(rows)
 df = df.sort_values(["vehicle", "stop_number"])
 
 # Save as CSV for easy viewing
-df.to_csv("./data/output/routes_table1.csv", index=False)
+df.to_csv("../data/output/routes_table1.csv", index=False)
 
 print(df)

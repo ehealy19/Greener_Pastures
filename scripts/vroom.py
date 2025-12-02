@@ -13,8 +13,8 @@ if result.returncode != 0:
     print("Please brew install vroom on the command line")
 
 # read in the JSON file of addresses
-input_path = "data/input/vroom_input1.json"
-output_path = "data/output/vroom_output1.json"
+input_path = "../data/input/vroom_input1.json"
+output_path = "../data/output/vroom_output1.json"
 try:
     with open(input_path, "r", encoding="utf-8") as f:
         data = json.load(f)
