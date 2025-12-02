@@ -2,10 +2,10 @@ import json
 import pandas as pd
 
 # reading in the original addresses
-addys = pd.read_excel("../data/input/only_addresses_final.xlsx")
+addys = pd.read_excel("./data/input/only_addresses_final.xlsx")
 
 # reading in the VROOM input (lat/long)
-with open("../data/input/vroom_input1.json") as f:
+with open("./data/input/vroom_input1.json") as f:
     vin = json.load(f)
 
 # creating a lookup table between the addresses and coordinates
@@ -22,7 +22,7 @@ for job in vin["jobs"]:
     }
 
 # reading in the outputted coording from VROOM
-with open("../data/output/vroom_output1.json") as f:
+with open("./data/output/vroom_output1.json") as f:
     vout = json.load(f)
 
 # converting the coordinates back to addresses with the lookup table
@@ -50,5 +50,5 @@ df = pd.DataFrame(rows)
 df = df.sort_values(["vehicle", "stop_number"])
 
 # saving the final converted addresses as a CSV and printing
-df.to_csv("../data/output/routes_table1.csv", index=False)
+df.to_csv("./data/output/routes_table1.csv", index=False)
 print(df)

@@ -33,4 +33,3 @@ print(f"Estimated O₂ emissions: {emissions:.6f} kg")
 # view the output results
 with open(output_path, "r", encoding="utf-8") as f:
     optimized_routes = json.load(f)
-# print(json.dumps(optimized_routes, indent=2))

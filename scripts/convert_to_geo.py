@@ -2,23 +2,22 @@ import requests
 import pandas as pd
 import json
 
-# Read in the addresses file
-addys = pd.read_excel('../data/input/only_addresses_final.xlsx')
+# reading in the addresses excel file
+addys = pd.read_excel('./data/input/only_addresses_final.xlsx')
 addys['Long'] = None
 addys['Lat'] = None
-
+# link for the US census locations for lookup later
 url = "https://geocoding.geo.census.gov/geocoder/locations/onelineaddress"
 
-# Converting to Lat and Long
+# converting addresses to coordinates
 for i, row in addys.iterrows():
     address = f"{row['Address']}, {row['City']}"
-
     params = {
         "address": address,
         "benchmark": "Public_AR_Census2020",
         "format": "json"
     }
-
+    # dealing with some of the addresses not available in the census
     if address == "418 Ravenscliff Dr, Media":
         coords = {"y": -75.36618079301951, "x": 39.93955917939913} 
     elif address == "727 Iris Ln, Media":
@@ -33,30 +32,31 @@ for i, row in addys.iterrows():
         coords = {"y": -75.42613635952054, "x": 39.91144070683103} 
     elif address == "18 Brookview Rd, Rose Valley":
         coords = {"y": -75.38133096441781, "x": 39.88908675461511} 
+    # otherwise look up the address in the census to get the coordinates
     else:
         r = requests.get(url, params=params).json()
         matches = r["result"]["addressMatches"]
-        
+        # check if no match
         if len(matches) == 0:
             print(f"No match for: {address}")
             continue
-
+        # get the latitude and longitude
         coords = matches[0]["coordinates"]
     addys.at[i, "Lat"] = coords["y"]
     addys.at[i, "Long"] = coords["x"]
-
+    # check each of the inputs
     print(f"✔ {address} → {coords}")
 
-# Writing to JSON file
-DEPOT = [-75.38130569631731, 39.91697580591546]
-NUM_VEHICLES = 13
+# Creating the JSON file that is readable by VROOM
+DEPOT = [-75.38130569631731, 39.91697580591546] # this is Media Florist coordinates
+NUM_VEHICLES = 13 # CHANGE THIS WHEN WANT MORE/LESS TRIPS
 vroom = {
     "vehicles": [
         {
             "id": vid,
-            "start": DEPOT,
+            "start": DEPOT, # start and end at media florist
             "end": DEPOT,
-            "capacity": [8]
+            "capacity": [8] # THIS IS THE NUMBER OF FLOWERS EACH CAR CAN HANDLE
         }
         for vid in range(1, NUM_VEHICLES + 1)
     ],
@@ -69,5 +69,6 @@ for idx, row in addys.iterrows():
         "service": 300,
         "delivery": [1]
     })
-with open("../data/input/vroom_input1.json", "w") as f:
+# writing to the JSON and saving
+with open("./data/input/vroom_input1.json", "w") as f:
     json.dump(vroom, f, indent=2)
