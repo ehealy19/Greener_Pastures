@@ -2,6 +2,12 @@ import requests
 import pandas as pd
 import json
 
+"""
+Python Script to convert the addresses from the excel 
+into latitude/longitude coordinates and create a JSON file
+with the specifications needed for VROOM.
+"""
+
 # reading in the addresses excel file
 addys = pd.read_excel('./data/input/only_addresses_final.xlsx')
 addys['Long'] = None

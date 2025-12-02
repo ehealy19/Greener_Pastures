@@ -1,6 +1,12 @@
 import json
 import pandas as pd
 
+"""
+Python Script to convert the VROOM outputted 
+coordinates from the JSON into a CSV (excel) 
+version that is human readable.
+"""
+
 # reading in the original addresses
 addys = pd.read_excel("./data/input/only_addresses_final.xlsx")
 

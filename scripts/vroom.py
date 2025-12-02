@@ -3,11 +3,17 @@ import json
 from codecarbon import EmissionsTracker
 from subprocess import run, CalledProcessError
 
-# begin the code carbon
+"""
+Python Script to read in the JSON of addresses, number of drivers, and delivery maximum,
+then inputs this to VROOM which queries OSRM and outputs optimizing delivery routes.
+The code also run CodeCarbon to track the carbon emissions from computation.
+"""
+
+# begin the code carbon tracker
 tracker = EmissionsTracker(project_name="greener_pasturers")
 tracker.start()
 
-# check that the CLI toop vroom is installed
+# check that the CLI vroom is installed
 result = run(["brew", "install", "vroom"], check=False)
 if result.returncode != 0:
     print("Please brew install vroom on the command line")
@@ -18,6 +24,7 @@ output_path = "../data/output/vroom_output1.json"
 try:
     with open(input_path, "r", encoding="utf-8") as f:
         data = json.load(f)
+# check for reading errors
 except FileNotFoundError:
     raise SystemExit("Data file not found.")
 except json.JSONDecodeError as e:
