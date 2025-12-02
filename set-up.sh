@@ -1,6 +1,7 @@
 #!/bin/bash
 # =======================================================
 # Greener Pastures: Environment + Routing Setup Script
+# Environment, tools, OSRM files check, and Docker
 # =======================================================
 
 set -e  # stop on first error
@@ -14,6 +15,7 @@ if ! command -v conda &> /dev/null; then
     exit 1
 fi
 
+# activating the conda environment from the environment.yml file
 if [ -f "environment.yml" ]; then
     ENV_NAME=$(head -1 environment.yml | cut -d' ' -f2)
     echo "Setting up Conda environment: $ENV_NAME"
@@ -32,6 +34,7 @@ fi
 # ------------------------------
 # 2. Homebrew + Tools
 # ------------------------------
+# downloading homebrew and some necessary homebrew tools
 if ! command -v brew &> /dev/null; then
     echo "Homebrew not found. Please install it from https://brew.sh first."
     exit 1
@@ -39,6 +42,7 @@ else
     echo "✅ Homebrew installed."
 fi
 
+# download docker
 if ! command -v docker &> /dev/null; then
     echo "Installing Docker..."
     brew install --cask docker
@@ -46,6 +50,7 @@ else
     echo "✅ Docker installed."
 fi
 
+# installing the VROOM CLI
 if ! command -v vroom &> /dev/null; then
     echo "Installing VROOM..."
     brew install vroom
@@ -53,6 +58,7 @@ else
     echo "✅ VROOM installed."
 fi
 
+# installing Colima
 if ! command -v colima &> /dev/null; then
     echo "Installing Colima..."
     brew install colima
@@ -75,6 +81,8 @@ fi
 # ------------------------------
 # 4. OSRM Setup (Reuse existing files)
 # ------------------------------
+# this checks that the OSRM files are in the data folder
+# these are needed for VROOM to query
 docker pull ghcr.io/project-osrm/osrm-backend:latest
 
 DATA_DIR="data/osrm"
@@ -84,10 +92,9 @@ MAP_FILE="pennsylvania-latest.osm.pbf"
 if [ -f "$MAP_FILE" ] && [ ! -f "$DATA_DIR/$MAP_FILE" ]; then
     cp "$MAP_FILE" "$DATA_DIR/"
 fi
-
 cd "$DATA_DIR"
 
-# --- Fix missing datasource_names ---
+# some of the files always need to be fixed each run
 if [ ! -f "pennsylvania-latest.osrm.datasource_names" ]; then
     echo "Creating missing datasource_names file..."
     echo "extract" > pennsylvania-latest.osrm.datasource_names
@@ -101,13 +108,14 @@ cd ../..
 # ------------------------------
 # 5. Run OSRM backend
 # ------------------------------
+# start the OSRM backend on Docker
 PORT=5000
 if lsof -i:$PORT >/dev/null 2>&1; then
     echo "Port 5000 is in use — switching to 5050."
     PORT=5050
 fi
 
-# Remove old container if it exists
+# remove the old docker container if it exists
 if docker ps -a --format '{{.Names}}' | grep -q "osrm-backend"; then
     echo "Removing existing OSRM container..."
     docker rm -f osrm-backend >/dev/null 2>&1 || true
@@ -133,5 +141,5 @@ fi
 
 echo "✅Setup Complete! When finished, run clean-up.sh."
 
-# CHECKING
+# checking that docker is working
 docker ps

@@ -1,6 +1,7 @@
 #!/bin/bash
 # =======================================================
 # Greener Pastures: Running Script
+# Performs the full working pipeline
 # =======================================================
 
 # convert addresses to lat/long

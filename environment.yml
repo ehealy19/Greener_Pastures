@@ -11,7 +11,7 @@ dependencies:
   - brotli-python=1.2.0=py311h5b255a4_0
   - bzip2=1.0.8=h80987f9_6
   - ca-certificates=2025.11.4=hca03da5_0
-  - certifi=2025.10.5=pyhd8ed1ab_0
+  - certifi=2025.11.12=py311hca03da5_0
   - cffi=2.0.0=py311h73c2a22_1
   - charset-normalizer=3.4.4=pyhd8ed1ab_0
   - click=8.3.0=pyh707e725_0
@@ -21,6 +21,7 @@ dependencies:
   - dash-core-components=2.0.0=pyhd8ed1ab_1
   - dash-html-components=2.0.0=pyhd8ed1ab_2
   - dash-table=5.0.0=pyhd8ed1ab_1
+  - et_xmlfile=2.0.0=py311hca03da5_0
   - expat=2.7.3=h982b769_0
   - fire=0.7.1=pyhd8ed1ab_0
   - flask=3.1.2=pyhd8ed1ab_0
@@ -53,6 +54,7 @@ dependencies:
   - numpy-base=2.3.4=py311h23175f9_1
   - nvidia-ml-py=13.580.82=pyhd8ed1ab_0
   - openblas=0.3.30=openmp_hea878ba_3
+  - openpyxl=3.1.5=py311h80987f9_0
   - openssl=3.6.0=h5503f6c_0
   - packaging=25.0=pyh29332c3_1
   - pandas=2.3.3=py311h3f644e9_1
@@ -70,7 +72,7 @@ dependencies:
   - pytz=2025.2=pyhd8ed1ab_0
   - rapidfuzz=3.14.1=py311h0962b89_0
   - readline=8.3=h0b18652_0
-  - requests=2.32.5=pyhd8ed1ab_0
+  - requests=2.32.5=py311hca03da5_1
   - retrying=1.4.2=pyhe01879c_0
   - setuptools=80.9.0=py311hca03da5_0
   - six=1.17.0=pyhe01879c_1
