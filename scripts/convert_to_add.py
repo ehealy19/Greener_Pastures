@@ -1,21 +1,19 @@
 import json
 import pandas as pd
 
-# Load original addresses for ID → address mapping
+# reading in the original addresses
 addys = pd.read_excel("../data/input/only_addresses_final.xlsx")
 
-# Load VROOM input (contains correct lat/long)
+# reading in the VROOM input (lat/long)
 with open("../data/input/vroom_input1.json") as f:
     vin = json.load(f)
 
-# Build lookup table (id → info)
+# creating a lookup table between the addresses and coordinates
 lookup = {}
 for job in vin["jobs"]:
     job_id = job["id"]
     lon, lat = job["location"]
-    
-    row = addys.iloc[job_id - 1]  # same ordering
-    
+    row = addys.iloc[job_id - 1]
     lookup[job_id] = {
         "address": row["Address"],
         "city": row["City"],
@@ -23,23 +21,20 @@ for job in vin["jobs"]:
         "lon": lon
     }
 
-# Load VROOM output
+# reading in the outputted coording from VROOM
 with open("../data/output/vroom_output1.json") as f:
     vout = json.load(f)
 
+# converting the coordinates back to addresses with the lookup table
 rows = []
-
-# Convert each route into flat row structure
 for r in vout["routes"]:
     vehicle = r["vehicle"]
     step_num = 0
-    
     for step in r["steps"]:
         if step["type"] == "job":
             job_id = step["id"]
             info = lookup[job_id]
             step_num += 1
-            
             rows.append({
                 "vehicle": vehicle,
                 "stop_number": step_num,
@@ -50,13 +45,10 @@ for r in vout["routes"]:
                 "lon": info["lon"]
             })
 
-# Make DataFrame
+# making a pandas dataframe and sorting
 df = pd.DataFrame(rows)
-
-# Sort by vehicle + stop number just to be safe
 df = df.sort_values(["vehicle", "stop_number"])
 
-# Save as CSV for easy viewing
+# saving the final converted addresses as a CSV and printing
 df.to_csv("../data/output/routes_table1.csv", index=False)
-
 print(df)
