@@ -34,4 +34,13 @@ One of the biggest contributors to climate change is the excessive emissions cau
 This project was designed for route optimization for floral deliveries. However, this can be used for other similar scale delivery businesses. The optimal number of single day deliveries for this project is 25-100.
 
 ## Project Structure
-- 
+- calculations/: contains the hand calculations for case study evaluation in the form of Excel workbooks
+- data/:
+  - input/: the raw address data files and the VROOM input JSON files 
+  - output/: the raw and cleaned VROOM outputted routes + the carbon emissions CSV
+- scripts/: Python scripts to run VROOM and OSRM optmization pipeline and scripts to convert between geographic coordinates and addresses
+- environment.yml: the necessary dependencies for this project
+- README: project overview
+- set-up.sh: downloads necessary files, sets up OSRM and docker backend
+- clean-up.sh: stops OSRM and Docker
+- run.sh: the final script file that runs the entire pipeline start to finish
