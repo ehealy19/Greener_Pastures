@@ -1,6 +1,6 @@
 # Greener Pastures: Reducing Small-Business Emissions Through Route Optimization
 
-Lizzie Healy
+Lizzie Healy\
 Course: Georgetown DSAN 5550 - Data Science & Climate Change
 
 ## Problem Definition
